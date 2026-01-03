@@ -19,13 +19,8 @@ Python, SpeechRecognition, pyttsx3, REST APIs, OpenAI API, requests, GitHub
 1. Install dependencies:
 pip install -r requirements.txt
 
-markdown
-Copy code
 2. Run the assistant:
 python app.py
-
-nginx
-Copy code
 
 ## Wake Word
 Say **"Hello"** to activate Jarvis.
