@@ -65,16 +65,14 @@ User Command → Processing → AI/Logic → Action Execution → Response
 ---
 
 ## 📂 Project Structure
-
-
+```
 Jarvis-ai-virtual-assistant/
 │── main.py
 │── features/
 │── utils/
 │── assets/
 │── README.md
-
-
+```
 ---
 
 ## ⚙️ Installation & Setup
@@ -115,11 +113,11 @@ python main.py
 - NLP basics
 - Real-world project building
 ---
+
 ## 👨‍💻 Author
-```
-Anirban Kundu
+**Anirban Kundu**
 🎓 B.Tech CSE | 🚀 Aspiring AI Engineer
-```
+
 ---
 ## 🌟 Support
 If you like this project:
