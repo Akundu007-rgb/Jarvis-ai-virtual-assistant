@@ -115,7 +115,7 @@ python main.py
 ---
 
 ## 👨‍💻 Author
-**Anirban Kundu**
+**Anirban Kundu**<br>
 🎓 B.Tech CSE | 🚀 Aspiring AI Engineer
 
 ---
