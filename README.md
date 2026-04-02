@@ -68,11 +68,11 @@ User Command → Processing → AI/Logic → Action Execution → Response
 
 
 Jarvis-ai-virtual-assistant/
-- │── main.py
-- │── features/
-- │── utils/
-- │── assets/
-- │── README.md
+│── main.py
+│── features/
+│── utils/
+│── assets/
+│── README.md
 
 
 ---
@@ -116,8 +116,10 @@ python main.py
 - Real-world project building
 ---
 ## 👨‍💻 Author
+```
 Anirban Kundu
-- 🎓 B.Tech IT | 🚀 Aspiring AI Engineer
+🎓 B.Tech CSE | 🚀 Aspiring AI Engineer
+```
 ---
 ## 🌟 Support
 If you like this project:
