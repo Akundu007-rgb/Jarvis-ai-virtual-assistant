@@ -1,61 +1,111 @@
-# 🤖 Jarvis — AI Virtual Assistant
+<h1 align="center">🤖 Jarvis AI Virtual Assistant</h1>
 
-A voice-activated and web-based AI assistant inspired by Tony Stark's J.A.R.V.I.S., built with Python, Flask, and Groq's blazing-fast LLM inference. Jarvis listens for your voice, answers questions using the Llama 3.3 70B model, opens websites, plays music, and fetches the latest news — all hands-free.
+<p align="center">
+  Your personal AI-powered assistant inspired by Iron Man's J.A.R.V.I.S.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.9+-blue?logo=python&logoColor=white">
+  <img src="https://img.shields.io/badge/AI-Groq%20%7C%20Llama%203.3%2070B-8A2BE2?logo=meta">
+  <img src="https://img.shields.io/badge/Backend-Flask-black?logo=flask">
+  <img src="https://img.shields.io/badge/Voice-SpeechRecognition-orange?logo=google">
+  <img src="https://img.shields.io/badge/Status-Active-brightgreen">
+</p>
+
+---
+
+## 🚀 Overview
+
+**Jarvis** is an AI-powered virtual assistant built with Python and Flask that responds to both **voice commands** and **text input** via a web interface. It leverages **Groq's ultra-fast Llama 3.3 70B** model to deliver intelligent, real-time responses — completely free.
+
+Inspired by **Iron Man's J.A.R.V.I.S.**, this project brings together speech recognition, AI inference, web automation, and a sleek browser-based UI into one cohesive assistant.
 
 ---
 
 ## ✨ Features
 
-- 🎙️ **Voice Activation** — Wake word detection using `SpeechRecognition`; just say "Hello" to activate
-- 🧠 **AI-Powered Responses** — Powered by Groq's Llama 3.3 70B model for fast, high-quality answers
-- 🌐 **Web Control** — Open Google, YouTube, Facebook, and LinkedIn by voice or web command
-- 🎵 **Music Playback** — Play songs from your personal music library
-- 📰 **Live News** — Fetches and reads out the latest headlines via NewsData.io
-- 🖥️ **Web Frontend** — A sleek browser-based interface to send commands and read responses
-- 🔌 **Flask REST API** — Clean backend API connecting the web frontend to the AI engine
+- 🎙️ **Voice Activation** — Wake Jarvis by saying *"Hello"*, then speak your command
+- 🧠 **AI Responses** — Powered by Groq's Llama 3.3 70B for fast, accurate answers
+- 🌐 **Web Automation** — Opens Google, YouTube, Facebook, LinkedIn on command
+- 🎵 **Music Playback** — Plays songs from your personal music library
+- 📰 **Live News** — Fetches and reads the latest headlines via NewsData.io
+- 🔊 **Text-to-Speech** — Speaks responses aloud using `pyttsx3`
+- 🖥️ **Web Frontend** — Browser-based UI to send commands and read responses
+- 🔌 **REST API** — Clean Flask backend connecting frontend to the AI engine
 
 ---
 
-## 🗂️ Project Structure
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| 🤖 AI / LLM | [Groq](https://groq.com) — Llama 3.3 70B Versatile (Free) |
+| 🎤 Voice Input | `SpeechRecognition` + Google Speech API |
+| 🔊 Voice Output | `pyttsx3` (offline TTS) |
+| 🌐 Backend | Python + Flask |
+| 🖥️ Frontend | HTML / CSS / JavaScript |
+| 📰 News API | [NewsData.io](https://newsdata.io) |
+| ⚙️ Env Config | `python-dotenv` |
+
+---
+
+## ⚙️ How It Works
+
+```
+User Input (Voice / Text)
+        ↓
+  Wake Word Detected ("Hello")
+        ↓
+  Command Processed by main.py
+        ↓
+   ┌────────────────────────────┐
+   │  Web command?  → Browser opened   │
+   │  Music command? → Song played     │
+   │  News command?  → Headlines read  │
+   │  Anything else? → Groq AI responds│
+   └────────────────────────────┘
+        ↓
+  Response spoken aloud + shown in UI
+```
+
+### Flow:
+1. User speaks or types a command
+2. Wake word (`"Hello"`) activates voice mode
+3. Command is matched against built-in actions
+4. Unknown commands are forwarded to **Groq AI** for a smart response
+5. Response is returned via speech and/or the web UI
+
+---
+
+## 📂 Project Structure
 
 ```
 Jarvis-ai-virtual-assistant/
 │
-├── main.py               # Core voice assistant logic (speech recognition, AI, commands)
-├── server.py             # Flask backend exposing REST API for the web frontend
-├── musiclibrary.py       # Dictionary of song names mapped to URLs
+├── main.py               # Core assistant logic (voice, AI, commands)
+├── server.py             # Flask REST API backend
+├── musiclibrary.py       # Song name → URL mapping
 ├── requirements.txt      # Python dependencies
-├── .env                  # Environment variables (not committed to git)
-├── .env.example          # Template for setting up environment variables
+├── .env                  # API keys (not committed)
+├── .env.example          # Environment variable template
 │
 ├── templates/
-│   └── index.html        # Jarvis web frontend (served by Flask)
+│   └── index.html        # Web frontend served by Flask
 │
-└── static/               # Static assets (CSS, JS, images)
+└── static/               # CSS, JS, and assets
 ```
 
 ---
 
-## 🚀 Getting Started
+## ⚙️ Installation & Setup
 
-### Prerequisites
-
-- Python 3.9 or higher
-- A free [Groq API key](https://console.groq.com)
-- A free [NewsData.io API key](https://newsdata.io) *(for news feature)*
-- A working microphone *(for voice mode)*
-
----
-
-### 1. Clone the Repository
-
+### 1️⃣ Clone the repository
 ```bash
 git clone https://github.com/Akundu007-rgb/Jarvis-ai-virtual-assistant.git
 cd Jarvis-ai-virtual-assistant
 ```
 
-### 2. Create and Activate a Virtual Environment
-
+### 2️⃣ Create and activate virtual environment
 ```bash
 # Windows
 python -m venv .venv
@@ -66,184 +116,113 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-### 3. Install Dependencies
-
+### 3️⃣ Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Set Up Environment Variables
+> ⚠️ **Windows users:** If `pyaudio` fails, install it manually from [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio)
+
+### 4️⃣ Configure environment variables
 
 Create a `.env` file in the project root:
-
 ```env
 GROQ_API_KEY=your_groq_api_key_here
 ```
+Get your **free** Groq API key at 👉 https://console.groq.com
 
-> **Get your free Groq API key at:** https://console.groq.com
+### 5️⃣ Run the assistant
 
----
-
-## 🖥️ Running the Web Interface
-
-Start the Flask server:
-
+**Web interface (recommended):**
 ```bash
 python server.py
 ```
+Then open 👉 `http://localhost:5000`
 
-Then open your browser and go to:
-
-```
-http://localhost:5000
-```
-
-Type any command in the input box and Jarvis will respond instantly.
-
----
-
-## 🎙️ Running Voice Mode
-
-To run the standalone voice assistant (no browser required):
-
+**Voice-only mode:**
 ```bash
 python main.py
 ```
 
-Jarvis will initialize and start listening. Say **"Hello"** to wake it up, then speak your command.
-
 ---
 
-## 🗣️ Supported Commands
+## 🎮 Example Commands
 
 | Command | Action |
 |---|---|
-| `Hello` | Wake word — activates Jarvis |
-| `Open Google` | Opens google.com in browser |
-| `Open YouTube` | Opens youtube.com in browser |
-| `Open Facebook` | Opens facebook.com in browser |
-| `Open LinkedIn` | Opens linkedin.com in browser |
-| `Play <song name>` | Plays song from music library |
-| `News` | Reads latest headlines aloud |
-| Any other query | Sent to Groq AI for a smart response |
+| `"Hello"` | Wake word — activates Jarvis |
+| `"Open Google"` | Opens google.com |
+| `"Open YouTube"` | Opens youtube.com |
+| `"Open Facebook"` | Opens facebook.com |
+| `"Open LinkedIn"` | Opens linkedin.com |
+| `"Play <song>"` | Plays song from music library |
+| `"News"` | Reads latest headlines |
+| `"What is machine learning?"` | AI-generated response via Groq |
 
 ---
 
 ## 🔌 API Reference
 
-The Flask server exposes the following endpoints:
-
 ### `POST /api/command`
+Send a text command to Jarvis.
 
-Send a command to Jarvis.
-
-**Request body:**
 ```json
-{
-  "command": "What is machine learning?"
-}
-```
+// Request
+{ "command": "What is Python?" }
 
-**Response:**
-```json
-{
-  "success": true,
-  "result": "Machine learning is a subset of AI...",
-  "command": "What is machine learning?"
-}
+// Response
+{ "success": true, "result": "Python is a high-level programming language..." }
 ```
-
----
 
 ### `GET /api/health`
+Check server and API key status.
 
-Check backend status and environment configuration.
-
-**Response:**
 ```json
-{
-  "success": true,
-  "groq_key_present": true,
-  "python_executable": "...",
-  "cwd": "..."
-}
+{ "success": true, "groq_key_present": true }
 ```
 
 ---
 
-## ⚙️ Tech Stack
+## 🚧 Future Improvements
 
-| Layer | Technology |
-|---|---|
-| AI / LLM | [Groq](https://groq.com) — Llama 3.3 70B Versatile |
-| Voice Input | `SpeechRecognition` + Google Speech API |
-| Voice Output | `pyttsx3` (offline TTS) |
-| Backend | Python + Flask |
-| Frontend | HTML / CSS / JavaScript |
-| News API | [NewsData.io](https://newsdata.io) |
-| Env Management | `python-dotenv` |
+- 🧠 Memory-based conversation (multi-turn context)
+- 🖥️ Full desktop GUI
+- 📱 Mobile app integration
+- 🌍 Multi-language support
+- 🔐 User authentication
+- 📅 Calendar & reminder integration
+- 🏠 Smart home device control
 
 ---
 
-## 📦 Requirements
+## 🧠 Learning Outcomes
 
-Key dependencies from `requirements.txt`:
-
-```
-flask
-flask-cors
-groq
-speechrecognition
-pyttsx3
-requests
-python-dotenv
-pyaudio
-```
-
-Install all with:
-
-```bash
-pip install -r requirements.txt
-```
-
-> **Note for Windows users:** If `pyaudio` fails to install, download the matching `.whl` file from [this repository](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio) and install it manually.
+- AI assistant architecture design
+- REST API development with Flask
+- Voice recognition & TTS integration
+- LLM API integration (Groq / Llama)
+- Real-world Python project building
+- Frontend–backend communication
 
 ---
 
-## 🔒 Environment Variables
+## 👨‍💻 Author
 
-| Variable | Description | Required |
-|---|---|---|
-| `GROQ_API_KEY` | Your Groq API key for LLM inference | ✅ Yes |
-
-Never commit your `.env` file. It is already listed in `.gitignore`.
+**Anirban Kundu**  
+🎓 B.Tech CSE &nbsp;|&nbsp; 🚀 Aspiring AI Engineer  
+[![GitHub](https://img.shields.io/badge/GitHub-Akundu007--rgb-181717?logo=github)](https://github.com/Akundu007-rgb)
 
 ---
 
-## 🤝 Contributing
+## 🌟 Support
 
-Contributions are welcome! To contribute:
-
-1. Fork the repository
-2. Create a new branch: `git checkout -b feature/your-feature-name`
-3. Make your changes and commit: `git commit -m "Add your feature"`
-4. Push to your branch: `git push origin feature/your-feature-name`
-5. Open a Pull Request
+If you like this project:
+- ⭐ **Star** this repository
+- 🍴 **Fork** it and build your own version
+- 📢 **Share** it with others
 
 ---
 
-## 📄 License
+## 📜 Disclaimer
 
-This project is licensed under the [MIT License](LICENSE).
-
----
-
-## 🙏 Acknowledgements
-
-- Inspired by J.A.R.V.I.S. from Marvel's Iron Man
-- Powered by [Groq](https://groq.com) for ultra-fast LLM inference
-- Built as part of a Python learning journey 🚀
-
----
-
-<p align="center">Made with ❤️ by <a href="https://github.com/Akundu007-rgb">Akundu007-rgb</a></p>
+This project is for **educational purposes only** and is inspired by the fictional AI system J.A.R.V.I.S. from Marvel's Iron Man. Not affiliated with Marvel or any related entities.
