@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jarvis Web Frontend</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <div class="app-shell">
+        <header>
+            <h1>Jarvis Web Frontend</h1>
+            <p>Send commands to the backend assistant and get text responses.</p>
+        </header>
+
+        <main>
+            <section class="command-panel">
+                <textarea id="commandInput" placeholder="Type a command, then click Send."></textarea>
+                <button id="sendButton">Send Command</button>
+            </section>
+
+            <section class="response-panel">
+                <h2>Response</h2>
+                <div id="responseOutput" class="response-output">No response yet.</div>
+            </section>
+
+            <section class="quick-actions">
+                <h2>Quick Actions</h2>
+                <div class="actions-grid">
+                    <button onclick="useExample('open google')">Open Google</button>
+                    <button onclick="useExample('open youtube')">Open YouTube</button>
+                    <button onclick="useExample('play manav')">Play Music</button>
+                    <button onclick="useExample('news')">Fetch News</button>
+                    <button onclick="useExample('What can you do?')">Ask Jarvis</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

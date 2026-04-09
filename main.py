@@ -3,37 +3,66 @@ import webbrowser
 import pyttsx3
 import musiclibrary
 import requests
-from openai import OpenAI
 import os
+from pathlib import Path
+from dotenv import load_dotenv
 
+try:
+    from groq import Groq
+except ImportError:
+    Groq = None
+
+def load_env():
+    env_path = Path(__file__).parent / '.env'
+    load_dotenv(dotenv_path=env_path, override=True)
+    print(f"[main] Loaded .env from {env_path}, GROQ_API_KEY set: {bool(os.getenv('GROQ_API_KEY'))}")
+
+# Load environment variables from .env file (explicitly specify path)
+load_env()
+
+# Initialize Groq client (will be set at runtime)
+groq_client = None
 
 recognizer = sr.Recognizer()
 engine = pyttsx3.init()
 newsapi = "pub_0c777691d7144bf5a41ca6b1d81d54f6"
 
 def aiProcess(command):
+    """Process AI request using Groq (ChatGPT-quality responses for free)"""
+    global groq_client
+
+    load_env()
+    groq_api_key = os.getenv("GROQ_API_KEY")
+    print(f"[main.aiProcess] GROQ_API_KEY set: {bool(groq_api_key)}")
+
+    if Groq is None:
+        return r"Groq SDK is not installed. Activate the .venv and run: .venv\Scripts\python.exe -m pip install -r requirements.txt"
+
+    if not groq_api_key:
+        return "Groq API key not configured. Please set GROQ_API_KEY environment variable."
+
+    if not groq_client:
+        groq_client = Groq(api_key=groq_api_key)
+    
     try:
-        # Initialize OpenAI client with your API key
-        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-        # Use the user's command in the prompt
-        completion = client.chat.completions.create(
-            model="gpt-4o-mini",
+        chat_completion = groq_client.chat.completions.create(
             messages=[
-                {"role": "system", "content": "You are a virtual assistant named Jarvis, skilled in general tasks like Alexa and Google Assistant."},
-                {"role": "user", "content": command}
-            ]
+                {
+                    "role": "system",
+                    "content": "You are Jarvis, a helpful AI assistant. Provide clear, accurate, and concise answers. Answer like ChatGPT or Claude - informative and well-structured. Do not make up information."
+                },
+                {
+                    "role": "user",
+                    "content": command
+                }
+            ],
+            model="llama-3.3-70b-versatile",
+            max_tokens=1024,
         )
-
-        # --- Output ---
-        print("--- Jarvis's Response ---")
-        return (completion.choices[0].message.content)
-
+        return chat_completion.choices[0].message.content
     except Exception as e:
-        # This block will catch the 'insufficient_quota' error, but uses a general error message
-        print(f"An error occurred during the API call: {e}")
-        print("\n💡 Action Required: Please check your OpenAI billing page.")
-        print("The API key likely has insufficient credit or has reached a spending limit.")
+        print(f"Groq API error: {e}")
+        return f"I encountered an error processing your request: {str(e)}"
 
 def processCommand(c) :
     if "open google" in c.lower() :
